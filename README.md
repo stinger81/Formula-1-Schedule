@@ -5,7 +5,7 @@
 
 <a name = 'summary'></a>
 ## Summary
-This program is designed to be executed in three distinct steps. This will allow for trh end user to remove specific races from a generated json file if needed. As well as to allow for past season to be uploaded to Google Calender if needed.
+This program is designed to be executed in three distinct steps. This will allow for the end user to remove specific races from a generated json file if needed. As well as to allow for past season to be uploaded to Google Calender if needed.
 
 There are multiple places where authorization is needed ensure that it is typed correctly.
 
