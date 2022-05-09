@@ -1,4 +1,4 @@
-# Add Formula 1 Schedule to Google Calender ![Version](https://img.shields.io/badge/python-v3-green) ![Version](https://img.shields.io/github/v/release/stinger81/Formula-1)
+# Add Formula 1 Schedule to Google Calender ![Version](https://img.shields.io/badge/python-v3-green) ![Version](https://img.shields.io/github/v/release/stinger81/Formula-1?include_prereleases)
 - [Summary](#summary)
 - [Google Development API](#google-API)
 - [Required Python Libraries](#libraries)
