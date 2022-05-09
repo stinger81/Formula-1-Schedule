@@ -1,17 +1,23 @@
 import os.path
 import json
+import datetime
 
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 SCOPES = ['https://www.googleapis.com/auth/calendar']
+
 if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-season = input('Enter Season to add (YYYY): ')
+try:
+    season = str(int(input('Enter Season to add (YYYY) ['+str(datetime.date.today().year)+']: ')))
+except:
+    season = str(datetime.date.today().year)
+
 with open('Formula_1_events_'+str(season)+'_season.json', 'r') as f:
     events = json.load(f)
-    print(events)
+
 # get list of calendars
 try:
     calList = []
@@ -24,7 +30,6 @@ try:
         page_token = calendar_list.get('nextPageToken')
         if not page_token:
             break
-    print(calList)
 except:
     None
 
@@ -66,6 +71,7 @@ print('----------------------------------------')
 for i in events:
     print(i['summary']+" | "+i['start']['dateTime']+i['start']['timeZone'])
 print('Confirm that the events above will be added to the following calendar: '+str(listID)+" | "+calName+" | "+calendarID)
+
 confirm = input('Confirm? ("CONFIRM") [None]: ')
 if confirm == 'CONFIRM':
     pass
@@ -73,11 +79,10 @@ else:
     raise SystemExit('Exiting Event List NOT Confirmed')
 
 print('''
-The event that were approved above will be added to the google calender selected.
+The events that were approved above will be added to the google calender selected.
 This must manually be undone through google calender if you are not satisfied.
 As per the GNU GPLv3 license, this software is provided as is, without warranty of any kind.
 ''')    
-
 
 confirm = input('Confirm Adding to calender. This can not be undone through this program ("CONFIRM") [None]: ')
 if confirm == 'CONFIRM':

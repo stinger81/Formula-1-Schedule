@@ -1,12 +1,19 @@
 from urllib.request import urlopen
 import json
 import datetime
+"""
+API Documnetation: https://documenter.getpostman.com/view/11586746/SztEa7bL
+"""
+schedule_link = "http://ergast.com/api/f1/current.json"
 
-class links:
-    schedule = "http://ergast.com/api/f1/current.json"
+schedule_season = "http://ergast.com/api/f1/"
 
 
-schedule = urlopen(links.schedule).read()
+selectSeason = input("Enter Season to add (YYYY) [current]: ")
+if len(selectSeason) == 4:
+    schedule_link = schedule_season + selectSeason + ".json"
+
+schedule = urlopen(schedule_link).read()
 schedule_json = json.loads(schedule)
 
 data = schedule_json["MRData"]
@@ -16,9 +23,6 @@ total_races = int(data['total'])
 raceTable = data['RaceTable']
 
 season = raceTable['season']
-
-# prompt for auto add all or check manually
-#autoAdd = input("Auto add all Y or n [n]: ")
 
 def buildEvent(EventName, country, locality, circuit, raceDate, raceTime, duration = 1):
     startDateTime, endDateTime = build_dateTime(raceDate, raceTime[:-1],duration)
