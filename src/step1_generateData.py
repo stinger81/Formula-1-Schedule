@@ -53,6 +53,20 @@ def build_dateTime(raceDate, raceTime,duration):
     endDateTime = endTime[:-5] + "-00:00"
     return startDateTime, endDateTime
 
+print("""
+0 - Grand Prix
+1 - First Practice
+2 - Second Practice
+3 - Third Practice
+4 - Qualifying
+5 - Sprints
+""")
+to_include = input("Enter Events to include (comma searated integers) [0,1,2,3,4,5]: ")
+if to_include == '':
+    to_include = "0,1,2,3,4,5"
+to_include =list(map(int, to_include.split(",")))
+
+
 eventsList = []
 
 for i in raceTable['Races']:
@@ -64,38 +78,44 @@ for i in raceTable['Races']:
 
     raceDate = i['date']
     raceTime = i['time']
-    eventName = raceName + " - Main Race | "+season +' Season'
-    eventsList.append(buildEvent(eventName, country, locality, circuit, raceDate, raceTime,duration=2))
-    try:
-        firstPractice = i['FirstPractice']
-        eventName = raceName + " - First Practice | "+season +' Season'
-        eventsList.append(buildEvent(eventName, country, locality, circuit, firstPractice['date'], firstPractice['time'],duration=1))
-    except:
-        firstPractice = None
-    try:
-        secondPractice = i['SecondPractice']
-        eventName = raceName + " - Second Practice | "+season +' Season'
-        eventsList.append(buildEvent(eventName, country, locality, circuit, secondPractice['date'], secondPractice['time'],duration=1))
-    except:
-        secondPractice = None
-    try:
-        thirdPractice = i['ThirdPractice']
-        eventName = raceName + " - Third Practice | "+season +' Season'
-        eventsList.append(buildEvent(eventName, country, locality, circuit, thirdPractice['date'], thirdPractice['time'],duration=1))
-    except:
-        thirdPractice = None
-    try:
-        qualifying = i['Qualifying']
-        eventName = raceName + " - Qualifying | "+season +' Season'
-        eventsList.append(buildEvent(eventName, country, locality, circuit, qualifying['date'], qualifying['time'],duration=1))
-    except:
-        qualifying = None
-    try:
-        sprint = i['Sprint']
-        eventName = raceName + " - Sprint | "+season +' Season'
-        eventsList.append(buildEvent(eventName, country, locality, circuit, sprint['date'], qualifying['time'],duration=1))
-    except:
-        sprint = None
+    eventName = raceName + " - Grand Prix | "+season +' Season'
+    if 0 in to_include:
+        eventsList.append(buildEvent(eventName, country, locality, circuit, raceDate, raceTime,duration=2))
+    if 1 in to_include:
+        try:
+            firstPractice = i['FirstPractice']
+            eventName = raceName + " - First Practice | "+season +' Season'
+            eventsList.append(buildEvent(eventName, country, locality, circuit, firstPractice['date'], firstPractice['time'],duration=1))
+        except:
+            firstPractice = None
+    if 2 in to_include:
+        try:
+            secondPractice = i['SecondPractice']
+            eventName = raceName + " - Second Practice | "+season +' Season'
+            eventsList.append(buildEvent(eventName, country, locality, circuit, secondPractice['date'], secondPractice['time'],duration=1))
+        except:
+            secondPractice = None
+    if 3 in to_include:
+        try:
+            thirdPractice = i['ThirdPractice']
+            eventName = raceName + " - Third Practice | "+season +' Season'
+            eventsList.append(buildEvent(eventName, country, locality, circuit, thirdPractice['date'], thirdPractice['time'],duration=1))
+        except:
+            thirdPractice = None
+    if 4 in to_include:
+        try:
+            qualifying = i['Qualifying']
+            eventName = raceName + " - Qualifying | "+season +' Season'
+            eventsList.append(buildEvent(eventName, country, locality, circuit, qualifying['date'], qualifying['time'],duration=1))
+        except:
+            qualifying = None
+    if 5 in to_include:
+        try:
+            sprint = i['Sprint']
+            eventName = raceName + " - Sprint | "+season +' Season'
+            eventsList.append(buildEvent(eventName, country, locality, circuit, sprint['date'], qualifying['time'],duration=1))
+        except:
+            sprint = None
     
 with open('Formula_1_events_'+str(season)+'_season.json', 'w') as f:
     json.dump(eventsList, f)
