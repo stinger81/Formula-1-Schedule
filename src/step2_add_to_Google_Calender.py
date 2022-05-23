@@ -90,12 +90,19 @@ if confirm == 'CONFIRM':
 else:
     raise SystemExit('Exiting NOT Confirmed')
 
+if not os.path.exists('events_added.json'):
+    with open('events_added.json', 'w') as f:
+        json.dump([], f)
 for i in events:
     try:
         service = build('calendar', 'v3', credentials=creds)
         events_result = service.events().insert(calendarId=calendarID, body=i).execute()
         print('Event created: %s' % (events_result.get('htmlLink')))
-        with open('events_added.txt', 'a') as f:
-            f.write(str(events_result.get('htmlLink'))+'\n')
+        with open('events_added.json', 'r') as f:
+            eventsLoad = json.load(f)
+        eventsLoad.append(events_result)
+        with open('events_added.json', 'w') as f:
+            json.dump(eventsLoad, f)
+        
     except HttpError as error:
         print('An error occurred: %s' % error)

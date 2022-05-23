@@ -61,6 +61,7 @@ print("""
 4 - Qualifying
 5 - Sprints
 """)
+
 to_include = input("Enter Events to include (comma searated integers) [0,1,2,3,4,5]: ")
 if to_include == '':
     to_include = "0,1,2,3,4,5"
