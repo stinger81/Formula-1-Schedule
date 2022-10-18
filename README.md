@@ -14,7 +14,7 @@ Execute the scripts in the following order:
 1. step0_quickstart.py
     - Check that Google Cloud API is configured correctly. Must exit with no errors and show up coming calender event to move on.
 2. step1_generateData.py
-    - Get currnet race times from teh internet and then save them to a json file
+    - Get currnet race times from the internet and then save them to a json file
 3. step2_add_to_Google_Calender.py
     - Will take the generated json file and then add it to the selected Google Calender.
 <a name = 'google-API'></a>
