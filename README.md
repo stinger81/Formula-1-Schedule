@@ -1,3 +1,6 @@
+# F1 Schedule Import Tool
+
+```
 # ##########################################################################
 # 
 #   Copyright (C) 2021-2022 stinger81
@@ -18,12 +21,13 @@
 #   stinger81 - GitHub
 #
 # ##########################################################################
+```
 
 # Add Formula 1 Schedule to Google Calender ![Version](https://img.shields.io/badge/python-v3-green) ![Version](https://img.shields.io/github/v/release/stinger81/Formula-1?include_prereleases)
 - [Summary](#summary)
 - [Google Development API](#google-API)
 - [Required Python Libraries](#libraries)
-- [Future Plans](#future)
+<!--- - [Future Plans](#future)-->
 
 <a name = 'summary'></a>
 ## Summary
